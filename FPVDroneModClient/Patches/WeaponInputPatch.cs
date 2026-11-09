@@ -6,7 +6,7 @@ using FPVDroneModClient.Helpers;
 using HarmonyLib;
 using SPT.Reflection.Patching;
 using System.Reflection;
-using WeaponInputClass = Class1730;
+using WeaponInputClass = EFT.FirearmHandsInputTranslator;
 
 namespace FPVDroneModClient.Patches
 {

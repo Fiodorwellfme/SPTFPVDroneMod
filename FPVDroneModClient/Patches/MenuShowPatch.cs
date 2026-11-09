@@ -18,7 +18,7 @@ namespace FPVDroneModClient.Patches
         {
             return AccessTools.Method(typeof(MenuScreen), nameof(MenuScreen.Show), [
                 typeof(Profile),
-                typeof(MatchmakerPlayerControllerClass),
+                typeof(EFT.UI.Matchmaker.MatchmakerPlayersController),
                 typeof(ESessionMode)
             ]);
         }
@@ -35,7 +35,7 @@ namespace FPVDroneModClient.Patches
             
                 if (fikaInstalled && !syncInstalled)
                 {
-                    NotificationManagerClass.DisplayMessageNotification(
+                    EFT.Communications.NotificationManager.DisplayMessageNotification(
                         "FPVMOD USING FIKA WARNING".Localized(),
                         ENotificationDurationType.Long,
                         ENotificationIconType.Alert);

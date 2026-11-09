@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using EFT.InventoryLogic;
+using EFT;
 using FPVDroneModClient.Components;
 using FPVDroneModClient.Enum;
 using FPVDroneModClient.Helpers;
@@ -54,7 +55,7 @@ namespace FPVDroneModClient.Items
             InstantKillDistance = template.InstantKillDistance;
             IsAntiTank = template.IsAntiTank;
             
-            List<ItemAttributeClass> attributes = Attributes.GetFilteredAttributes(
+            List<ItemAttribute> attributes = Attributes.GetFilteredAttributes(
                 EItemAttributeId.Resource,
                 EItemAttributeId.Size,
                 EItemAttributeId.LimitedDiscard

@@ -10,11 +10,11 @@ namespace FPVDroneModClient.Patches
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(BTRControllerClass), nameof(BTRControllerClass.method_7));
+            return AccessTools.Method(typeof(EFT.Vehicle.BtrController), nameof(EFT.Vehicle.BtrController.LoadBTRVehicle));
         }
 
         [PatchPrefix]
-        private static bool PatchPrefix(BTRControllerClass __instance)
+        private static bool PatchPrefix()
         {
             // if tank is dead and perma death is enabled dont spawn the tank
             if (Plugin.TankDeathState.IsDead &&

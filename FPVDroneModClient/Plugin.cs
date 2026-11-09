@@ -57,10 +57,10 @@ namespace FPVDroneModClient
                 9999 // wtf :waytoodank: TODO: rewrite ai stuff
             );
 
-            int itemIndex = GClass3381.IndexOf(typeof(Item));
-            GClass3381.List_0.Insert(itemIndex, typeof(DroneItem));
-            GClass3381.List_0.Insert(itemIndex, typeof(PayloadItem));
-            GClass3381.List_0.Insert(itemIndex, typeof(BatteryItem));
+            int itemIndex = EFT.InventoryLogic.ItemSorter.IndexOf(typeof(Item));
+            EFT.InventoryLogic.ItemSorter._itemSuccessors.Insert(itemIndex, typeof(DroneItem));
+            EFT.InventoryLogic.ItemSorter._itemSuccessors.Insert(itemIndex, typeof(PayloadItem));
+            EFT.InventoryLogic.ItemSorter._itemSuccessors.Insert(itemIndex, typeof(BatteryItem));
 
             TankDeathState = RouteHelper.FetchTankDeathState();
             

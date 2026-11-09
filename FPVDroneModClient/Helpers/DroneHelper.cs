@@ -43,7 +43,7 @@ namespace FPVDroneModClient.Helpers
 
                 if (failReasonString != null)
                 {
-                    NotificationManagerClass.DisplayMessageNotification(
+                    EFT.Communications.NotificationManager.DisplayMessageNotification(
                         failReasonString,
                         ENotificationDurationType.Default,
                         ENotificationIconType.Alert
@@ -75,16 +75,16 @@ namespace FPVDroneModClient.Helpers
             InstanceHelper.StaticEffect.enabled = newState;
             localPlayer.PointOfView = newState ? EPointOfView.ThirdPerson : EPointOfView.FirstPerson;
             Singleton<CommonUI>.Instance.EftBattleUIScreen.CanvasGroup.gameObject.SetActive(!newState);
-            EFTPhysicsClass.SyncTransformsClass.UpdateMode = newState ? EFTPhysicsClass.SyncTransformsClass.UpdateModeType.FixedUpdate : EFTPhysicsClass.SyncTransformsClass.UpdateModeType.SmoothSimulate;
+            PhysicsExtensions.Simulation.UpdateMode = newState ? PhysicsExtensions.Simulation.UpdateModeType.FixedUpdate : PhysicsExtensions.Simulation.UpdateModeType.SmoothSimulate;
 
             EftGamePlayerOwner playerOwner = localPlayer.GetComponent<EftGamePlayerOwner>();
             playerOwner.enabled = !newState;
             
-            VisorEffect visorEffect = CameraClass.Instance.VisorEffect;
-            NightVision nightVision = CameraClass.Instance.NightVision;
-            ThermalVision thermalVision = CameraClass.Instance.ThermalVision;
+            VisorEffect visorEffect = EFT.CameraControl.CameraManager.Instance.VisorEffect;
+            BSG.CameraEffects.NightVision nightVision = EFT.CameraControl.CameraManager.Instance.NightVision;
+            ThermalVision thermalVision = EFT.CameraControl.CameraManager.Instance.ThermalVision;
                 
-            Material visorMaterial = visorEffect.method_4();
+            Material visorMaterial = visorEffect.GetMaterial();
 
             if (CurrentController)
             {
@@ -121,7 +121,7 @@ namespace FPVDroneModClient.Helpers
                     {
                         nightVision.On = true;
                         nightVision.TextureMask.Mask = AssetHelper.DroneNightVisionMask;
-                        nightVision.Material_0.SetTexture(_maskId, AssetHelper.DroneNightVisionLens); // but for why
+                        nightVision.Material.SetTexture(_maskId, AssetHelper.DroneNightVisionLens); // but for why
                         nightVision.Color = new Color(60, 235, 100) / 255f;
                         nightVision.NoiseIntensity = 0.25f;
                         nightVision.NoiseScale = 0.15f;
@@ -140,7 +140,7 @@ namespace FPVDroneModClient.Helpers
                 }
             }
 
-            Camera camera = CameraClass.Instance.Camera;
+            Camera camera = EFT.CameraControl.CameraManager.Instance.Camera;
             if (newState)
             {
                 LastFov = camera.fieldOfView;
@@ -227,7 +227,7 @@ namespace FPVDroneModClient.Helpers
         {
             if (controller != null)
             {
-                NotificationManagerClass.DisplayMessageNotification(
+                EFT.Communications.NotificationManager.DisplayMessageNotification(
                     "SELECTED DRONE".Localized()
                 );
 
@@ -240,7 +240,7 @@ namespace FPVDroneModClient.Helpers
         {
             if (controller != null)
             {
-                NotificationManagerClass.DisplayMessageNotification(
+                EFT.Communications.NotificationManager.DisplayMessageNotification(
                     "FLIPPED DRONE".Localized()
                 );
 
@@ -254,7 +254,7 @@ namespace FPVDroneModClient.Helpers
         {
             if (SelectedControllers.Count <= 0)
             {
-                NotificationManagerClass.DisplayMessageNotification(
+                EFT.Communications.NotificationManager.DisplayMessageNotification(
                     "No selected drones",
                     ENotificationDurationType.Default,
                     ENotificationIconType.Alert
@@ -263,7 +263,7 @@ namespace FPVDroneModClient.Helpers
             }
 
             List<BaseDroneController> processed = [];
-            ActionsReturnClass actions = new ActionsReturnClass();
+            EFT.UI.AvailableInteractionState actions = new EFT.UI.AvailableInteractionState();
 
             foreach (BaseDroneController controller in SelectedControllers)
             {
@@ -297,7 +297,7 @@ namespace FPVDroneModClient.Helpers
             {
                 CurrentController = controller;
             
-                NotificationManagerClass.DisplayMessageNotification(
+                EFT.Communications.NotificationManager.DisplayMessageNotification(
                     "SELECTED DRONE".Localized()
                 );
             
@@ -306,7 +306,7 @@ namespace FPVDroneModClient.Helpers
             }
             else
             {
-                NotificationManagerClass.DisplayMessageNotification(
+                EFT.Communications.NotificationManager.DisplayMessageNotification(
                     "NOT OWNER".Localized(),
                     ENotificationDurationType.Default,
                     ENotificationIconType.Alert

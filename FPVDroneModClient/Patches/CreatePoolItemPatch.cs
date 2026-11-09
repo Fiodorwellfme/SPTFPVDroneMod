@@ -10,7 +10,7 @@ using SPT.Reflection.Patching;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
-using CompoundItemSlot = EFT.InventoryLogic.Slot.Class2456;
+using CompoundItemSlot = EFT.InventoryLogic.Slot.ProtectedSlotItemAddress;
 
 namespace FPVDroneModClient.Patches
 {
@@ -18,7 +18,7 @@ namespace FPVDroneModClient.Patches
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(PoolManagerClass), nameof(PoolManagerClass.CreateItemAsync));
+            return AccessTools.Method(typeof(EFT.ObjectsFactory), nameof(EFT.ObjectsFactory.CreateItemAsync));
         }
 
         [PatchPostfix]

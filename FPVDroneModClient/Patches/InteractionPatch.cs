@@ -18,25 +18,25 @@ namespace FPVDroneModClient.Patches
     {
         protected override MethodBase GetTargetMethod()
         {
-            return AccessTools.Method(typeof(GetActionsClass), nameof(GetActionsClass.GetAvailableActions), [
+            return AccessTools.Method(typeof(EFT.InteractionContextHelper), nameof(EFT.InteractionContextHelper.GetAvailableActions), [
                 typeof(GamePlayerOwner),
-                typeof(GInterface177)
+                typeof(EFT.IInteractive)
             ]);
         }
 
         [PatchPrefix]
-        public static bool PatchPrefix(ref ActionsReturnClass __result, GamePlayerOwner owner, GInterface177 interactive)
+        public static bool PatchPrefix(ref EFT.UI.AvailableInteractionState __result, GamePlayerOwner owner, EFT.IInteractive interactive)
         {
             if (interactive == null) return true;
             
             LootItem lootItem = interactive as LootItem;
             if (lootItem != null && lootItem.Item is DroneItem)
             {
-                ActionsReturnClass returnClass = GetActionsClass.smethod_8(owner, lootItem);
+                EFT.UI.AvailableInteractionState returnClass = EFT.InteractionContextHelper.GetAvailableActions(owner, lootItem);
                 if (returnClass != null)
                 {
-                    ActionsTypesClass takeAction = null;
-                    foreach (ActionsTypesClass action in returnClass.Actions)
+                    EFT.UI.InteractionAction takeAction = null;
+                    foreach (EFT.UI.InteractionAction action in returnClass.Actions)
                     {
                         if (action.Name == "Take")
                         {
@@ -53,7 +53,7 @@ namespace FPVDroneModClient.Patches
                     {
                         takeAction.Action = () =>
                         {
-                            NotificationManagerClass.DisplayMessageNotification(
+                            EFT.Communications.NotificationManager.DisplayMessageNotification(
                                 "IS BEING PILOTED".Localized(),
                                 ENotificationDurationType.Default,
                                 ENotificationIconType.Alert

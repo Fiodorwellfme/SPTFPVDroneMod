@@ -12,7 +12,7 @@ namespace FPVDroneModClient.Items
     {
         public DroneItem(string id, ModTemplate template) : base(id, template)
         {
-            Slots = Array.ConvertAll(template.Slots, method_7);
+            Slots = Array.ConvertAll(template.Slots, CG_Ctor);
 
             var compatibleAttribute = Attributes.FindAttribute(EItemAttributeId.CompatibleWith);
 

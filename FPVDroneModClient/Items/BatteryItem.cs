@@ -1,5 +1,6 @@
 #if !UNITY_EDITOR
 using EFT.InventoryLogic;
+using EFT;
 using FPVDroneModClient.Helpers;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using WTTClientCommonLib.Attributes;
 
 namespace FPVDroneModClient.Items
 {
-    public class BatteryItemTemplate(int capacity) : BarterItemTemplateClass
+    public class BatteryItemTemplate(int capacity) : BarterItemTemplate
     {
         public int Capacity = capacity;
     }
@@ -15,7 +16,7 @@ namespace FPVDroneModClient.Items
     [CustomParent("69c932c7a7d59932499b5cde", typeof(BatteryItem), typeof(BatteryItemTemplate))]
     public class BatteryItem : SlotToggleableItem<BatteryItem>
     {
-        [GAttribute26]
+        [EFT.ComponentAttribute]
         [JsonProperty("Resource")]
         public readonly ResourceComponent ResourceComponent;
 
@@ -26,7 +27,7 @@ namespace FPVDroneModClient.Items
             Capacity = template.Capacity;
             Components.Add(ResourceComponent = new ResourceComponent(this, template));
 
-            List<ItemAttributeClass> attributes = Attributes.GetFilteredAttributes(
+            List<EFT.InventoryLogic.ItemAttribute> attributes = Attributes.GetFilteredAttributes(
                 EItemAttributeId.Resource,
                 EItemAttributeId.Size,
                 EItemAttributeId.LimitedDiscard
