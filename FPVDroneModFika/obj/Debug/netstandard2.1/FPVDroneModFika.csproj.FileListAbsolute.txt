@@ -1,0 +1,16 @@
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.csproj.AssemblyReference.cache
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/MyPluginInfo.cs
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.GeneratedMSBuildEditorConfig.editorconfig
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.AssemblyInfoInputs.cache
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.AssemblyInfo.cs
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.csproj.CoreCompileInputs.cache
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/FPVDroneModFika.deps.json
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/FPVDroneModFika.dll
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/FPVDroneModFika.pdb
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/Fika.Core.dll
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/FPVDroneModClient.dll
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/spt-common.dll
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/bin/Debug/netstandard2.1/FPVDroneModClient.pdb
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDrone.666DCB07.Up2Date
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.dll
+/home/theodoremichel/Games/SPT/Modding/SPTFPVDroneMod-master/FPVDroneModFika/obj/Debug/netstandard2.1/FPVDroneModFika.pdb

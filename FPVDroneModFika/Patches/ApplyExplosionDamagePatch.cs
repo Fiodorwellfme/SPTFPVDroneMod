@@ -4,7 +4,6 @@ using Fika.Core.Main.Players;
 using Fika.Core.Main.Utils;
 using Fika.Core.Networking;
 using Fika.Core.Networking.LiteNetLib;
-using Fika.Core.Networking.Packets.Player.Common;
 using Fika.Core.Networking.Packets.Player.Common.SubPackets;
 using FPVDroneModClient.Helpers;
 using FPVDroneModClient.Models;
@@ -71,7 +70,7 @@ namespace FPVDroneModFika.Patches
                     EBodyPart bodyPart = collider.BodyPartType;
                     EBodyPartColliderType colliderType = collider.BodyPartColliderType;
 
-                    bool isVisible = VectorHelper.VisCheck(explosion.Position, collider.transform.position, LayerMaskClass.HighPolyWithTerrainNoGrassMask);
+                    bool isVisible = VectorHelper.VisCheck(explosion.Position, collider.transform.position, LayersMaskController.HighPolyWithTerrainNoGrassMask);
                     if (!isVisible) continue;
                     
                     float colliderDistance = Vector3.Distance(collider.transform.position, explosion.Position);
@@ -79,7 +78,7 @@ namespace FPVDroneModFika.Patches
                     Vector3 directionFromExplosion = Vector3.Normalize(collider.transform.position - explosion.Position);
                     float finalDamage = explosion.Damage * Mathf.Pow(colliderDistanceMultiplier, 3f);
                 
-                    DamageInfoStruct damageInfo = new DamageInfoStruct
+                    EFT.Ballistics.DamageInfo damageInfo = new EFT.Ballistics.DamageInfo
                     {
                         DamageType = EDamageType.Explosion,
                         Damage = finalDamage,
@@ -97,9 +96,9 @@ namespace FPVDroneModFika.Patches
 
                     if (fikaPlayer is ObservedPlayer)
                     {
-                        fikaPlayer.CommonPacket.Type = ECommonSubPacketType.Damage;
-                        fikaPlayer.CommonPacket.SubPacket = DamagePacket.FromValue(fikaPlayer.NetId, damageInfo, bodyPart, colliderType);
-                        Singleton<IFikaNetworkManager>.Instance.SendNetReusable(ref fikaPlayer.CommonPacket, DeliveryMethod.ReliableOrdered, true);
+                        var packet = new DamagePacket(fikaPlayer.NetId, damageInfo, bodyPart, colliderType);
+                        Singleton<IFikaNetworkManager>.Instance.SendPlayerPacket(
+                            in packet, fikaPlayer.NetId, DeliveryMethod.ReliableOrdered, true);
                     }
                     else
                     {

@@ -81,7 +81,7 @@ namespace FPVDroneModFika.Components
 
             if (SyncComponents.TryGetValue(data.DroneNetId, out DroneSyncComponent sync) && sync != null)
             {
-                IPlayerOwner playerOwner = Singleton<GameWorld>.Instance.GetAlivePlayerBridgeByProfileID(data.OwnerProfileId);
+                IObserverToPlayerBridge playerOwner = Singleton<GameWorld>.Instance.GetAlivePlayerBridgeByProfileID(data.OwnerProfileId);
                 
                 ExplosionHelper.CreateExplosion(new ExplosionData
                 {
@@ -117,7 +117,7 @@ namespace FPVDroneModFika.Components
             Plugin.Logger.LogInfo($"received tank destroy packet");
             
             TankDestroyData data = packet.Data;
-            BTRView btrView = BTRControllerClass.Instance.BtrView;
+            BTRView btrView = EFT.Vehicle.BtrController.Instance.BtrView;
 
             if (btrView)
             {
