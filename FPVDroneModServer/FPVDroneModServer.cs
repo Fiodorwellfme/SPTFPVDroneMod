@@ -1,6 +1,6 @@
 ﻿using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
-using SPTarkov.Server.Core.Utils.Logger;
+using SPTarkov.Common.Models.Logging;
 using System.Reflection;
 using FPVDroneModServer.Services;
 using WTTServerCommonLib.Helpers;
@@ -9,9 +9,9 @@ using Path = System.IO.Path;
 
 namespace FPVDroneModServer
 {
-    [Injectable(InjectionType = InjectionType.Singleton, TypePriority = OnLoadOrder.PostDBModLoader + 2)]
+    [Injectable(InjectionType = InjectionType.Singleton, TypePriority = OnLoadOrder.Preload)]
     public class FPVDroneModServer(
-        SptLogger<FPVDroneModServer> logger,
+        ISptLogger<FPVDroneModServer> logger,
         TankDeathService tankDeathService,
         WTTCustomQuestService questService,
         WTTCustomQuestZoneService zoneService,
@@ -27,18 +27,26 @@ namespace FPVDroneModServer
         public string ConfigPath => Path.Combine(AssemblyLocation, "config");
         public string ParentsPath => Path.Combine(AssemblyLocation, "parents");
         
-        public async Task OnLoad()
+        public async Task OnLoadAsync(CancellationToken cancellationToken)
         {
             var assembly = Assembly.GetExecutingAssembly();
             
+            cancellationToken.ThrowIfCancellationRequested();
             tankDeathService.LoadTankStateConfig(ConfigPath, "tankdeathstate.json");
             imageService.CreateSlotImages(assembly, "slots");
+            cancellationToken.ThrowIfCancellationRequested();
             await parentService.CreateCustomParents(assembly, "db/parents");
+            cancellationToken.ThrowIfCancellationRequested();
             await localeService.CreateCustomLocales(assembly, "db/locales");
+            cancellationToken.ThrowIfCancellationRequested();
             await itemService.CreateCustomItems(assembly, "db/items");
+            cancellationToken.ThrowIfCancellationRequested();
             await questService.CreateCustomQuests(assembly, "db/quests");
+            cancellationToken.ThrowIfCancellationRequested();
             await zoneService.CreateCustomQuestZones(assembly, "db/zones");
+            cancellationToken.ThrowIfCancellationRequested();
             await lootService.CreateCustomLootSpawns(assembly, "db/loot");
+            cancellationToken.ThrowIfCancellationRequested();
             await assortService.CreateCustomAssortSchemes(assembly, "db/assort");
             //await recipeService.CreateHideoutRecipes(Assembly.GetExecutingAssembly(), "db/recipes");
             
